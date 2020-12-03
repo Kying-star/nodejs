@@ -1,0 +1,55 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-02 20:31:14
+ * @LastEditTime: 2020-12-03 20:54:59
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /helloworld/view/index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>index</h1>
+</body>
+<script>
+    console.log(1)
+    let Ajax = {
+        get: function(url, fn) {
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function() {
+
+                if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
+
+                    fn.call(this, xhr.responseText);
+                }
+            };
+            xhr.send();
+        },
+
+        post: function(url, data, fn) {
+            var xhr = new XMLHttpRequest()
+            xhr.open("POST", url, true)
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+                    fn.call(this, xhr.responseText)
+                }
+            };
+            xhr.send(data)
+        }
+    }
+    Ajax.get('http://175.27.128.171:3000/arr', function() {
+        console.log(this)
+    })
+</script>
+
+</html>
